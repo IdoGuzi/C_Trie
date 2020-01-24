@@ -27,7 +27,9 @@ int main(int argc, char* argv[]) {
         }
 
     }
-    print_trie(t,TRUE);
+    if (argc>1 && argv[1]=='r'){
+        print_trie(t,FALSE);
+    }else print_trie(t,TRUE);
 
     free(s);
     release_trie(t);

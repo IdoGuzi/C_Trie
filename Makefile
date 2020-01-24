@@ -15,8 +15,8 @@ libtrie.so: trie.o libnode.so
 libnode.so: node.o
 	$(CC) -shared -o libnode.so node.o 
 
-frequency‬‬_r.o: ‫‪frequency‬‬_r.c node.h trie.h
-	$(CC) $(FLAGS) -c ‫‪frequency‬‬_r.c
+frequency‬‬_r.o: ‫‪frequency‬‬‬‬_r.c node.h trie.h
+	$(CC) $(FLAGS) -c ‫‪frequency‬‬‬‬_r.c
 
 ‫‪frequency‬‬.o: ‫‪frequency‬‬.c node.h trie.h
 	$(CC) $(FLAGS) -c ‫‪frequency‬‬.c
