@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
         return 0;
     }
     char c;
-    while (scanf("%c", &c)!=EOF){
+    while ((c = getc(stdin))!=EOF){
         if (64<(int)c && (int)c<91) c = (char)(32+(int)c);
         if ((int)c<97 || 122<(int)c) continue;
         if (i>=len){
