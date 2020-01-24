@@ -27,10 +27,10 @@ int main(int argc, char* argv[]) {
         }
 
     }
-    if (argc>1 && argv[1]=='r'){
+    if (argc>1 && strcmp(argv[1],"r")==0){
         print_trie(t,FALSE);
     }else print_trie(t,TRUE);
-
+    printf("done");
     free(s);
     release_trie(t);
     return 0;
