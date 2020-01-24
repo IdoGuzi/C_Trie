@@ -9,6 +9,10 @@ int main(int argc, char* argv[]) {
     int i=0;
     int len = 5;
     char *s = (char*)malloc(sizeof(char)*len);
+    if (s==NULL){
+        printf("Insufficient Memory, Exiting... \n");
+        return 0;
+    }
     char c;
     while (scanf("%c", &c)!=EOF){
         if (64<(int)c && (int)c<91) c = (char)(32+(int)c);
@@ -16,6 +20,10 @@ int main(int argc, char* argv[]) {
         if (i>=len){
             len=len*2;
             s = (char*) realloc(s,sizeof(char)*len);
+            if (s==NULL){
+                printf("Insufficient Memory, Exiting... \n");
+                return 0;
+            }
         }
         if (c==' ' || c=='\t' || c=='\n' || c=='\0'){
             *(s+i)='\0';

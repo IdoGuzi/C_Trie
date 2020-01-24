@@ -13,6 +13,10 @@
 //****** node functions ***********
 node* init_node(char data){
     node *n = (node*) malloc(sizeof(node));
+    if (n==NULL) {
+        printf("Insufficient Memory, Exiting... \n");
+        exit(1);
+    }
     n->letter = data;
     n->count = 0;
     for (int i=0;i<26;i++) {
