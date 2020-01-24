@@ -27,7 +27,7 @@ void release_trie(trie t) {
 }
 
 
-void insert(trie t,char *s) {
+void insert(trie t,char* s) {
     int i=0;
     t.size++;
     if (strlen(s)>t.longest_string) t.longest_string=strlen(s);
