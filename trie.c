@@ -81,7 +81,7 @@ void get_string(node *n, char* s, int i){
 void get_string_reversed(struct node *n, char* s, int i){
     if (n->letter=='$') {
         *(s+i) = '\0';
-        printf("%s %ld\n", s, n->count);
+        printf("%s\t%ld\n", s, n->count);
         return;
     }
     *(s+i) = n->letter;
