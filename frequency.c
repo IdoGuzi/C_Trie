@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "trie.h"
 
 
@@ -14,10 +15,7 @@ int main(int argc, char* argv[]) {
         return 0;
     }
     char c = '*';
-    while (scanf(" %c",&c)!=EOF){
-        printf("what\n");
-        if (64<(int)c && (int)c<91) c = (char)(32+(int)c);
-        if ((int)c<97 || 122<(int)c) continue;
+    while ((c=getc(stdin))!=EOF){
         if (i>=len){
             len=len*2;
             s = (char*) realloc(s,sizeof(char)*len);
@@ -28,20 +26,21 @@ int main(int argc, char* argv[]) {
         }
         if (c==' ' || c=='\t' || c=='\n' || c=='\0'){
             *(s+i)='\0';
-            insert(t,s);
+            insert(&t,s);
             i=0;
-        }else{
-            *(s+i)=c;
-            i++;
+            continue;
         }
+        if (64<(int)c && (int)c<91) c = (char)(32+(int)c);
+        if ((int)c<97 || 122<(int)c) continue;
+        *(s+i)=c;
+        i++;
 
     }
-    printf("printing\n\n\n\n");
     if (argc>1){
         if(strcmp(argv[1],"r")==0) {
-            print_trie(t,FALSE);
-        }else print_trie(t,TRUE);
-    }else print_trie(t,TRUE);
+            print_trie(&t,FALSE);
+        }else print_trie(&t,TRUE);
+    }else print_trie(&t,TRUE);
     // releasing alocceited memory
     free(s);
     release_trie(t);

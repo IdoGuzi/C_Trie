@@ -27,34 +27,35 @@ void release_trie(trie t) {
 }
 
 
-void insert(trie t,char* s) {
+void insert(trie* t,char* s) {
     int i=0;
-    t.size++;
-    if (strlen(s)>t.longest_string) t.longest_string=strlen(s);
-    struct node *temp;
-    temp = t.root;
+    t->size++;
+    if (strlen(s)>t->longest_string) t->longest_string=strlen(s);
+    struct node *temp = t->root;
     temp->count++;
     while (*(s+i)!='\0'){
         set_child(temp, *(s+i));
-        temp = temp->children[(int)*(s+i)-97];
-        temp->count++;
+        temp = temp->children[((int)*(s+i))-97];
         i++;
     }
-    if (!temp->children[26]) {
+    if (temp->children[26]) {
         temp->children[26]->count++;
     }else{
-        struct node *done = init_node('$');
-        temp->children[26] = done;
+        set_child(temp,'$');
     }
 }
 
-void print_trie(trie t, enum boolean b){
-    node *temp = t.root;
-    char *s = (char*)malloc(sizeof(char)*t.longest_string);
+void print_trie(trie* t, enum boolean b){
+    node *temp = t->root;
+    char *s = (char*)malloc(sizeof(char)*t->longest_string);
+    if (s==NULL){
+        printf("Insufficient Memory, Exiting... \n");
+        exit(1);
+    }
     int i=0;
     if (b==TRUE){
         for (int j=0;j<26;j++){
-            if (temp->children[j]) get_string(temp, s, i);
+            if (temp->children[j]) get_string(temp->children[j], s, i);
         }
     }else {
         for (int j=25;j>-1;j--){
@@ -67,7 +68,7 @@ void print_trie(trie t, enum boolean b){
 void get_string(node *n, char* s, int i){
     if (n->letter=='$') {
         *(s+i) = '\0';
-        printf("%s %ld", s, n->count);
+        printf("%s %ld\n", s, n->count);
         return;
     }
     *(s+i) = n->letter;
@@ -80,7 +81,7 @@ void get_string(node *n, char* s, int i){
 void get_string_reversed(struct node *n, char* s, int i){
     if (n->letter=='$') {
         *(s+i) = '\0';
-        printf("%s %ld", s, n->count);
+        printf("%s %ld\n", s, n->count);
         return;
     }
     *(s+i) = n->letter;

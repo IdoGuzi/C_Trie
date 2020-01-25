@@ -36,9 +36,10 @@ void release_node(node* n){
 
 void set_child(node *parent,char letter){
     int index = (int) letter - 97;
+    if (letter=='$') index = 26;
     if (!parent->children[index]){
         node *child=init_node(letter);
-        child->letter=letter;
+        child->count++;
         parent->children[index] = child;
     }else parent->children[index]->count++;
 }
