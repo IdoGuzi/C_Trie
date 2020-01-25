@@ -17,8 +17,8 @@ void insert(trie t,char* s);
 
 void print_trie(trie t, enum boolean b);
 
-void get_string(struct node *n, char *s, int i);
+void get_string(struct node *n, char* s, int i);
 
-void get_string_reversed(struct node *n, char *s, int i);
+void get_string_reversed(struct node *n, char* s, int i);
 
 #endif

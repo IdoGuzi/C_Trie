@@ -53,7 +53,7 @@ void print_trie(trie t, enum boolean b){
     char *s = (char*)malloc(sizeof(char)*t.longest_string);
     int i=0;
     if (b==TRUE){
-        for (int j=0;j<26;j--){
+        for (int j=0;j<26;j++){
             if (temp->children[j]) get_string(temp, s, i);
         }
     }else {
@@ -61,30 +61,29 @@ void print_trie(trie t, enum boolean b){
             if (temp->children[j]) get_string_reversed(temp->children[j], s, i);
         }
     }
+    free(s);
 }
 
-void get_string(node *n, char *s, int i){
+void get_string(node *n, char* s, int i){
     if (n->letter=='$') {
         *(s+i) = '\0';
         printf("%s %ld", s, n->count);
         return;
     }
     *(s+i) = n->letter;
-    i++;
     if (n->children[26]) get_string(n->children[26], s, i+1);
     for (int j=0;j<26;j++){
         if (n->children[j]) get_string(n->children[j], s, i+1);
     }
 }
 
-void get_string_reversed(struct node *n, char *s, int i){
+void get_string_reversed(struct node *n, char* s, int i){
     if (n->letter=='$') {
         *(s+i) = '\0';
         printf("%s %ld", s, n->count);
         return;
     }
     *(s+i) = n->letter;
-    i++;
     if (n->children[26]) get_string_reversed(n->children[26], s, i+1);
     for (int j=25;j>-1;j--){
         if (n->children[j]) get_string_reversed(n->children[j], s, i+1);

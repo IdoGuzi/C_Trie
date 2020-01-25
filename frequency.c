@@ -13,8 +13,9 @@ int main(int argc, char* argv[]) {
         printf("Insufficient Memory, Exiting... \n");
         return 0;
     }
-    char c;
-    while ((c = getc(stdin))!=EOF){
+    char c = '*';
+    while (scanf(" %c",&c)!=EOF){
+        printf("what\n");
         if (64<(int)c && (int)c<91) c = (char)(32+(int)c);
         if ((int)c<97 || 122<(int)c) continue;
         if (i>=len){
@@ -35,8 +36,11 @@ int main(int argc, char* argv[]) {
         }
 
     }
-    if (argc>1 && strcmp(argv[1],"r")==0){
-        print_trie(t,FALSE);
+    printf("printing\n\n\n\n");
+    if (argc>1){
+        if(strcmp(argv[1],"r")==0) {
+            print_trie(t,FALSE);
+        }else print_trie(t,TRUE);
     }else print_trie(t,TRUE);
     // releasing alocceited memory
     free(s);
