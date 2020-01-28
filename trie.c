@@ -45,6 +45,21 @@ void insert(trie* t,char* s) {
     }
 }
 
+int contains(trie* t, char *s){
+    node *temp = t->root;
+    int i=0;
+    while (*(s+i)!='\0'){
+        if (temp->children[*(s+i)-97]) {
+            temp = temp->children[*(s+i)-97];
+            i++;
+            continue;
+        }else return 0;
+    }
+    if (temp->children[26]){
+        return temp->children[26]->count;
+    }else return 0;
+}
+
 void print_trie(trie* t, enum boolean b){
     node *temp = t->root;
     char *s = (char*)malloc(sizeof(char)*t->longest_string);

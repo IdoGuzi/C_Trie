@@ -15,6 +15,8 @@ void release_trie(trie t);
 
 void insert(trie* t,char* s);
 
+int contains(trie* t, char *s);
+
 void print_trie(trie* t, enum boolean b);
 
 void get_string(struct node *n, char* s, int i);
