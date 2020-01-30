@@ -4,40 +4,57 @@
 #include <ctype.h>
 #include "trie.h"
 
-int main(int argc, char* argv[]) {
-    trie t = init_trie();
-    int i=0;
-    int len = 5;
-    char *s = (char*)malloc(sizeof(char)*len);
-    if (s==NULL){
-        printf("Insufficient Memory, Exiting... \n");
-        return 0;
-    }
-    char c = '*';
-    while ((c=getc(stdin))!=EOF){
-        if (i>=len){
-            len=len*2;
-            s = (char*) realloc(s,sizeof(char)*len);
-            if (s==NULL){
-                printf("Insufficient Memory, Exiting... \n");
-                return 0;
-            }
-        }
-        if (c==' ' || c=='\t' || c=='\n' || c=='\0'){
-            *(s+i)='\0';
-            insert(&t,s);
-            i=0;
-            continue;
-        }
-        if (64<(int)c && (int)c<91) c = (char)(32+(int)c);
-        if ((int)c<97 || 122<(int)c) continue;
-        *(s+i)=c;
-        i++;
+//function declurations
+void insert_contains_test();
 
+int main(int argc, char* argv[]) {
+    insert_contains_test();
+}
+
+// this function test insert and contains at the same time.
+// count fails for insert/contains indevidualy 
+void insert_contains_test() {
+    int insert_fails = 0;
+    int contains_fails = 0;
+    trie t = init_trie();
+    trie* t_ptr = &t;
+    char *str = "hello";
+    insert(t_ptr,str);
+    int expected = 1;
+    int result = contains(t_ptr,str);
+    if (result!=expected) {
+        if (result==0) {
+            printf("ERROR: insert failed");
+            insert_fails++;
+        }else {
+            printf("ERROR: contains failed");
+            contains_fails++;
+        }
     }
-    char *word = "it";
-    printf("the word \"it\" can be found in the trie %d times\n", contains(&t,word));
-    free(s);
+    insert(t_ptr,str);
+    expected = 2;
+    result = contains(t_ptr,str);
+    if (result!=expected) {
+        if ((insert_fails==0 && result==1) || (insert_fails==1 && result==0)){
+            printf("ERROR: insert failed");
+            insert_fails++;
+        }else{
+            printf("ERROR: contains failed");
+            contains_fails++;
+        }
+    }
+    str = "world";
+    expected=0;
+    result = contains(t_ptr,str);
+    if (result!=expected) {
+        if (result==0) {
+            printf("ERROR: insert failed");
+            insert_fails++;
+        }else {
+            printf("ERROR: contains failed");
+            contains_fails++;
+        }
+    }
+    printf("insert fails=%d\ncontains fails=%d\n", insert_fails,contains_fails);
     release_trie(t);
-    return 0;
 }
