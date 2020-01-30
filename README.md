@@ -4,11 +4,14 @@ A basic c project impelementing trie data structure, this was the 4th assingment
 
 Information about trie: https://en.wikipedia.org/wiki/Trie
 
-**version 1.0.0** 
+**version 1.0.2** 
 Finished assingment.
 
-Trie support only insertion (in O(n) time).
-Coming soon: contains and deletion.
+Trie support insertion (in O(n) time).
+(update 1.0.2):
+Trie support contains  (in O(n) time).
+tests for inserstion and contains.
+Coming soon: deletion.
 
 frequency.c: is an example of a use for trie, insert a text (only english letters) to the trie
              and print the trie in alphabetic order or reversed order.
