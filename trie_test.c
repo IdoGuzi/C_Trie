@@ -44,15 +44,23 @@ void insert_contains_test() {
             contains_fails++;
         }
     }
-    /*
+    printf("%d\n",contains(t_ptr,str));
     delete(t_ptr,str);
     expected = 1;
     result = contains(t_ptr,str);
     if (result!=expected) {
-        printf("ERROR: delete failed");
+        printf("ERROR: delete failed\n");
         delete_fails++;
     }
-    */
+    print_trie(t_ptr,TRUE);
+    delete(t_ptr,str);
+    expected = 0;
+    print_trie(t_ptr,TRUE);
+    result = contains(t_ptr,str);
+    if (result!=expected) {
+        printf("ERROR: delete failed\n");
+        delete_fails++;
+    }
 
     str = "world";
     expected=0;

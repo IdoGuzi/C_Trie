@@ -19,14 +19,14 @@ node* init_node(char data){
     }
     n->letter = data;
     n->count = 0;
-    for (int i=0;i<26;i++) {
+    for (int i=0;i<NUM_LETTERS;i++) {
         n->children[i] = NULL;
     }
     return n;
 }
 
 void release_node(node* n){
-    for (int i=0;i<27;i++) {
+    for (int i=0;i<NUM_LETTERS;i++) {
         if(n->children[i]) {release_node(n->children[i]);}
     }
     free(n);

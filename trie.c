@@ -34,7 +34,9 @@ void insert(trie* t,char* s) {
     struct node *temp = t->root;
     temp->count++;
     while (*(s+i)!='\0'){
-        set_child(temp, *(s+i));
+        if (temp->children[((int)*(s+i))-97]){
+            temp->children[((int)*(s+i))-97]->count++;
+        }else set_child(temp, *(s+i));
         temp = temp->children[((int)*(s+i))-97];
         i++;
     }
@@ -69,13 +71,14 @@ void delete(trie* t, char* s){
     temp->count--;
     int i=0;
     while (*(s+i)!='\0'){
-        temp = temp->children[*(s+i)-97];
-        if (temp->count==1) {
-            release_node(temp);
+        if (temp->children[*(s+i)-97]->count==1) {
+            release_node(temp->children[*(s+i)-97]);
+            temp->children[*(s+i)-97]=NULL;
+            printf("released\n");
             return;
-        }else temp->count--; 
+        }else temp->children[*(s+i)-97]->count--;
+        temp = temp->children[*(s+i)-97];
         i++;
-        continue;
     }
     temp = temp->children[26];
     if (temp->count==1) {
