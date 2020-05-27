@@ -26,7 +26,7 @@ node* init_node(char data){
 }
 
 void release_node(node* n){
-    for (int i=0;i<26;i++) {
+    for (int i=0;i<27;i++) {
         if(n->children[i]) {release_node(n->children[i]);}
     }
     free(n);

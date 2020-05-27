@@ -16,6 +16,7 @@ int main(int argc, char* argv[]) {
 void insert_contains_test() {
     int insert_fails = 0;
     int contains_fails = 0;
+    int delete_fails = 0;
     trie t = init_trie();
     trie* t_ptr = &t;
     char *str = "hello";
@@ -43,6 +44,16 @@ void insert_contains_test() {
             contains_fails++;
         }
     }
+    /*
+    delete(t_ptr,str);
+    expected = 1;
+    result = contains(t_ptr,str);
+    if (result!=expected) {
+        printf("ERROR: delete failed");
+        delete_fails++;
+    }
+    */
+
     str = "world";
     expected=0;
     result = contains(t_ptr,str);
@@ -55,6 +66,6 @@ void insert_contains_test() {
             contains_fails++;
         }
     }
-    printf("insert fails=%d\ncontains fails=%d\n", insert_fails,contains_fails);
+    printf("insert fails=%d\ncontains fails=%d\ndelete fails=%d\n", insert_fails,contains_fails,delete_fails);
     release_trie(t);
 }

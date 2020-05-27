@@ -60,6 +60,29 @@ int contains(trie* t, char *s){
     }else return 0;
 }
 
+void delete(trie* t, char* s){
+    if (contains(t,s)<=0) {
+        printf("the word: %s wasn't found in the trie", s);
+        return;
+    }
+    node *temp = t->root;
+    temp->count--;
+    int i=0;
+    while (*(s+i)!='\0'){
+        temp = temp->children[*(s+i)-97];
+        if (temp->count==1) {
+            release_node(temp);
+            return;
+        }else temp->count--; 
+        i++;
+        continue;
+    }
+    temp = temp->children[26];
+    if (temp->count==1) {
+        release_node(temp);
+    }else temp->count--;
+}
+
 void print_trie(trie* t, enum boolean b){
     node *temp = t->root;
     char *s = (char*)malloc(sizeof(char)*t->longest_string);
